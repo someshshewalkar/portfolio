@@ -123,10 +123,21 @@ function scrollActive() {
 window.addEventListener('scroll', scrollActive)
 
 //Resume 
-document.getElementById("showPdfBtn").addEventListener("click", function() {
-  // Define the PDF file URL
-  const pdfUrl = "mahesh.pdf"; // Replace with your PDF file path
+let rbtns = document.getElementsByClassName("downloadBtn");
 
-  // Redirect to the PDF display page with the PDF URL as a query parameter
-  window.location.href = `pdfPage.html?pdfUrl=${encodeURIComponent(pdfUrl)}`;
-});
+for (let i = 0; i < rbtns.length; i++) {
+  rbtns[i].addEventListener("click", function() {
+    const pdfUrl = "static/mahesh.pdf";
+  
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "resume.pdf";  
+    document.body.appendChild(link);
+    link.click();
+    
+    // Open in a new tab
+    window.open(pdfUrl, "_blank");
+    
+    document.body.removeChild(link);
+  });
+}
